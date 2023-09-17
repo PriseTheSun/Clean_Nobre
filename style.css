@@ -1,0 +1,310 @@
+* {
+    margin: 0px !important;
+    padding: 0px;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
+    list-style: none !important;
+}
+
+a {
+    font-family: sans-serif;
+}
+
+a:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+#logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#header {
+    box-sizing: border-box;
+    height: 70px;
+    padding: 1rem;
+}
+
+#nav img {
+    width: 35px;
+}
+
+#menu {
+    display: flex;
+    list-style: none;
+    gap: 10px
+}
+
+#menu a {
+    display: block;
+    padding: 0.5rem;
+    cursor: pointer !important;
+}
+
+#btn-mobile {
+    display: none;
+}
+
+#whash-bg {
+    background-image: url(/assets/images/maquina_de_lavar.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 600px;
+}
+#about-me{
+    background-image: url(/assets/images/funcionaria.jpg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 400px;
+    
+}
+#services-clean p,
+#services-clean i{
+    color: #2D3D57;
+}
+#services-cards h5,
+#services-cards p{
+    color: #2D3D57;
+}
+#info-box {
+    height: 600px;
+    overflow: hidden;
+    word-break: break-word;
+
+}
+
+#title-clean {
+    font-size: 50px;
+}
+
+#subtitle-clean {
+    font-size: 18px;
+}
+
+#button-width {
+    width: 200px;
+}
+
+::-webkit-scrollbar {
+    width: 12px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2D3D57; 
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0; 
+}
+
+#quem_somos,
+#nossos_servicos,
+#quem_somos,
+#redes_sociais,
+#grandes_marcas,
+#qualidade{
+    color: #2D3D57 !important;
+}
+
+section p{
+    color: #2D3D57 !important;
+}
+
+#quem_somos::after,
+#nossos_servicos::after,
+#quem_somos::after,
+#redes_sociais::after,
+#grandes_marcas::after{
+    content: "";
+    width: 10%;
+    display: block;
+    height: 2px;
+    background: #2D3D57;
+ }
+
+.services {
+    -webkit-box-shadow: 10px 0px 5px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 10px 0px 5px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 10px 0px 5px 1px rgba(0, 0, 0, 0.05);
+}
+.spacer-item{
+    gap: 10px;
+}
+
+/*TESTE*/
+iframe {
+  aspect-ratio: 16/9;
+}
+
+.video-container {
+  margin: 2rem;
+  max-height: 300px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: grid;
+  place-content: center;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  --position: 50%;
+}
+
+.image-container {
+  max-width: 800px;
+  max-height: 90vh;
+  aspect-ratio: 1/1;
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left;
+}
+
+.image-before {
+  position: absolute;
+  inset: 0;
+  width: var(--position);
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slider:focus-visible ~ .slider-button {
+  outline: 5px solid black;
+  outline-offset: 3px;
+}
+
+.slider-line {
+  position: absolute;
+  inset: 0;
+  width: .2rem;
+  height: 100%;
+  background-color: #fff;
+  /* z-index: 10; */
+  left: var(--position);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.slider-button {
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  padding: .5rem;
+  border-radius: 100vw;
+  display: grid;
+  place-items: center;
+  top: 50%;
+  left: var(--position);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* z-index: 100; */
+  box-shadow: 1px 1px 1px hsl(0, 50%, 2%, .5);
+}
+
+
+
+
+
+
+/*=============(Media Querie)================*/
+@media (max-width: 1024px) {
+    #menu {
+        display: block;
+        position: absolute;
+        width: 100%;
+        top: 70px;
+        right: 0px;
+        background: #e7e7e70a;
+        transition: 0.6s;
+        z-index: 1000;
+        height: 0px;
+        visibility: hidden;
+        overflow-y: hidden;
+    }
+
+    #nav.active #menu {
+        height: calc(100vh - 70px);
+        visibility: visible;
+        overflow-y: auto;
+        background-color: #2D3D57;
+    }
+
+    #menu a {
+        padding: 1rem 0;
+        margin: 0 1rem;
+        border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    #btn-mobile {
+        display: flex;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+        gap: 0.5rem;
+    }
+
+    #hamburger {
+        border-top: 2px solid;
+        width: 20px;
+    }
+
+    #hamburger::after,
+    #hamburger::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: currentColor;
+        margin-top: 5px;
+        transition: 0.3s;
+        position: relative;
+    }
+
+    #nav.active #hamburger {
+        border-top-color: transparent;
+    }
+
+    #nav.active #hamburger::before {
+        transform: rotate(135deg);
+    }
+
+    #nav.active #hamburger::after {
+        transform: rotate(-135deg);
+        top: -7px;
+    }
+}
+
+@media (max-width: 475px) {
+    #about-me{
+        height: 200px;
+    }
+}

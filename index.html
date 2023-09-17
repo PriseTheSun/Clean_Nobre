@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+    <!-- icon -->
+    <link rel="shortcut icon" href="assets/icons/washing-machine.svg" type="image/x-icon">
+    <!-- font awesome-->
+    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!-- splide css -->
+    <link rel="stylesheet" href="node_modules/@splidejs/splide/dist/css/splide.min.css">
+    <!-- splide js -->
+    <script src="node_modules/@splidejs/splide/dist/js/splide.min.js"></script>
+    <!-- aos css -->
+    <link rel="stylesheet" href="node_modules/aos/dist/aos.css">
+    <!-- aos js -->
+    <script src="node_modules/aos/dist/aos.js"></script>
+
+
+
+
+    <title>CleanNobre</title>
+</head>
+
+<body>
+    <header id="header" class="d-flex justify-content-center col-12">
+
+        <nav id="nav" class=" d-flex align-items-center justify-content-between col-9">
+            <a id="logo" class="text-primary-emphasis" href="#"> <img src="/assets/icons/logo.svg"
+                    alt="Logo_CleanNobre">CleanNobre</a>
+            <button aria-label="Abrir Menu" id="btn-mobile" aria-haspopup="true" aria-controls="menu"
+                aria-expanded="false">Menu
+                <span id="hamburger"></span>
+            </button>
+            <ul id="menu" role="menu">
+                <li><a class="text-primary-emphasis" href="/" title="Sobre">Sobre</a></li>
+                <li><a class="text-primary-emphasis" href="/" title="Sobre">Serviços</a></li>
+                <li><a class="text-primary-emphasis" href="/" title="Planos">Planos</a></li>
+                <li><a class="text-primary-emphasis" href="/" title="Contatos">Contatos</a></li>
+                <form class="d-flex" role="search">
+                    <button class="btn btn-outline-primary" type="submit" title="Fale Conosco">Fale Conosco</button>
+                </form>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="whash-bg" class="row justify-content-center">
+        <div class="col-9">
+            <div id="info-box" class="col-md-5 d-flex flex-column justify-content-center">
+                <p class="text-light fw-semibold mb-1">Suas Roupas Limpas, Nossa Especialidade.</p>
+                <h1 id="title-clean" class="text-light">Lavanderia Clean Nobre</h1>
+                <p id="subtitle-clean" class="text-light mt-4">Onde a excelência se encontra com a pureza. Nossa
+                    lavanderia oferece cuidado premium para suas roupas, garantindo frescor e sofisticação
+                    incomparáveis.</p>
+                <div class="row">
+                    <button id="button-width" class="btn btn-light mt-3"><i
+                            class="fa-solid fa-calendar-days mx-2"></i>Agendar Horário</button>
+                    <button id="button-width" class="btn btn-outline-light mt-3 ms-3">Saiba Mais<i
+                            class="fa-solid fa-arrow-right mx-2"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services-clean" class="row mt-3 justify-content-center spacer-item">
+
+        <div class="col-md-3 p-5 rounded border d-flex flex-column align-items-center justify-content-center services"
+            data-aos="fade-up" data-aos-anchor-placement="bottom-bottom"">
+            <i class=" fa-regular fa-calendar-days" style="font-size: 30px;"></i>
+            <p class="mt-3 fw-medium">Atendimentos de Seg a Sex das 8h as 18h</p>
+        </div>
+        <div class="col-md-3 p-5 rounded border d-flex flex-column align-items-center justify-content-center services"
+            data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
+            <i class="fa-solid fa-truck" style="font-size: 30px;"></i>
+            <p class="mt-3 fw-medium">Entrega e retiradas em domicílio</p>
+        </div>
+        <div class="col-md-3 p-5 rounded border d-flex flex-column align-items-center justify-content-center services"
+            data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+            <i <i class="fa-solid fa-building" style="font-size: 30px;"></i>
+            <p class="mt-3 fw-medium">Atendimento empresarial</p>
+        </div>
+    </section>
+
+
+    <section class="row mt-5 mb-5 justify-content-center ">
+        <div class="col-md-5" data-aos="fade-right">
+            <h3 id="quem_somos">Quem Somos</h3>
+            <p class="mt-3">Na Clean Nobre Lavanderia, somos mais do que apenas uma lavanderia; somos um compromisso com
+                a excelência e a qualidade. Com uma trajetória de dedicação ao cuidado das suas roupas e tecidos mais
+                preciosos, nossa equipe é impulsionada por uma paixão inabalável por oferecer um serviço impecável.
+
+                Nossa missão é proporcionar não apenas uma lavagem, mas uma experiência que transcenda as expectativas.
+                Cada peça que nos é confiada recebe o tratamento VIP que merece, combinando tecnologia avançada com o
+                toque humano para garantir que suas roupas saiam não apenas limpas, mas rejuvenescidas.
+
+                No coração da Clean Nobre, está o respeito pelo meio ambiente e a sustentabilidade. Utilizamos práticas
+                de lavagem ecoconscientes, buscando minimizar nosso impacto no planeta enquanto mantemos suas roupas em
+                perfeitas condições.
+
+                Venha nos conhecer e descubra por que somos a escolha preferida para quem valoriza o cuidado, a
+                elegância e a confiabilidade. Na Clean Nobre, suas roupas são tratadas com a nobreza que merecem.</p>
+        </div>
+        <div id="about-me" class="col-md-4" data-aos="fade-left"></div>
+
+    </section>
+
+
+    <section id="services-cards" class="row mt-5 mb-5 justify-content-center">
+        <div class="row justify-content-center mb-3 mt-5">
+            <div class="col-md-9">
+                <h3 id="nossos_servicos">Nossos Serviços</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-up-right">
+                <div class="d-flex justify-content-center mt-3"><img src="/assets/icons/logo.svg" class="card-img-top"
+                        alt="..." style="width: 35px;"></div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Lavanderia</h5>
+                    <p class="card-text mt-2">Oferecemos excelência em lavagem e cuidado de roupas para um visual
+                        impecável. Confie em nós para manter suas peças sempre frescas e perfeitas.</p>
+                    <div class="d-flex justify-content-center mt-4"><a href="#" class="btn btn-outline-primary">Tirar
+                            Duvidas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-up">
+                <div class="d-flex justify-content-center mt-3"><img src="/assets/icons/ferro_de_passar.svg"
+                        class="card-img-top" alt="..." style="width: 45px;"></div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Passadoria</h5>
+                    <p class="card-text mt-2">Deixe-nos tornar sua vida mais fácil e suas roupas impecáveis. Experimente
+                        nossa passadoria de alta qualidade hoje mesmo!</p>
+                    <div class="d-flex justify-content-center mt-4"><a href="#" class="btn btn-outline-primary">Tirar
+                            Duvidas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="card" data-aos="fade-up-left">
+                <div class="d-flex justify-content-center mt-3"><img src="/assets/icons/higienização.svg"
+                        class="card-img-top" alt="..." style="width: 45px;"></div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Higiênização</h5>
+                    <p class="card-text mt-2">Garantimos uma higienização rigorosa que elimina fungos e impurezas,
+                        enquanto nossa lavagem a seco preserva a integridade das suas peças.</p>
+                    <div class="d-flex justify-content-center mt-4"><a href="#" class="btn btn-outline-primary">Tirar
+                            Duvidas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="row mt-5 justify-content-center">
+        <div class=" col-md-4 " data-aos="fade-right">
+            <h3 id="qualidade">Qualidade Impecável, nossa dedicação à higienização e eliminação de fungos</h3>
+
+            <p class="mt-4">Na Lavanderia Clean Nobre, a qualidade é o nosso cartão de visitas. Acreditamos que cada
+                peça de roupa que nos é confiada merece um tratamento excepcional, e isso começa com uma higienização
+                impecável.
+
+                Nossos processos de lavagem não são apenas eficazes, mas também meticulosamente projetados para garantir
+                a eliminação completa de fungos e bactérias. Sabemos que a higienização adequada não é apenas uma
+                questão de aparência, mas também de saúde. Portanto, empregamos técnicas avançadas e produtos de limpeza
+                de alta qualidade para garantir que suas roupas estejam completamente livres de qualquer ameaça à saúde.
+
+                Nosso compromisso com a eliminação de fungos é mais do que uma promessa; é uma prioridade. Sabemos que
+                esses micro-organismos podem causar danos não visíveis, mas prejudiciais, aos tecidos e, mais
+                importante, à sua saúde. Portanto, investimos em tecnologia de ponta e treinamento contínuo da equipe
+                para garantir que nossos clientes recebam o serviço mais confiável e seguro possível.
+
+                Na Clean Nobre, a qualidade e a higienização não são apenas palavras, são compromissos que assumimos a
+                cada dia. Confie em nós para cuidar das suas roupas como se fossem nossas próprias, proporcionando-lhes
+                uma limpeza profunda que elimina não apenas manchas e sujeira, mas também qualquer preocupação com
+                fungos e bactérias. Sua saúde e a durabilidade das suas roupas são nossa prioridade máxima.</p>
+        </div>
+        <div class="col-md-5" data-aos="fade-left">
+            <aside>
+                <div class="container">
+                    <div class="image-container">
+                        <img class="image-before slider-image" src="assets/images/dirty.png" alt="sujo" />
+                        <img class="image-after slider-image" src="assets/images/clean.png" alt="limpo" />
+                    </div>
+
+
+                    <input type="range" min="0" max="100" value="50" aria-label="Percentage of before photo shown"
+                        class="slider" />
+                    <div class="slider-line" aria-hidden="true"></div>
+                    <div class="slider-button" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                            viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"></rect>
+                            <line x1="128" y1="40" x2="128" y2="216" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <line x1="96" y1="128" x2="16" y2="128" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <polyline points="48 160 16 128 48 96" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+                            <line x1="160" y1="128" x2="240" y2="128" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <polyline points="208 96 240 128 208 160" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+                        </svg>
+                    </div>
+                </div>
+
+            </aside>
+        </div>
+    </section>
+
+
+    <section class="mt-5">
+        <div class="row justify-content-center mb-3 mt-5">
+            <div class="col-md-9">
+                <h3 id="redes_sociais">Acompanhe nossa rede social </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <img src="assets/images/post1.png" class="w-100 shadow-1-strong rounded mb-4" alt="lavanderia"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+
+                <img src="assets/images/post5.png" class="w-100 shadow-1-strong rounded mb-4" alt="Novidades"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+            </div>
+
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <img src="assets/images/post2.png" class="w-100 shadow-1-strong rounded mb-4" alt="higienização"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+
+                <img src="assets/images/post3.png" class="w-100 shadow-1-strong rounded mb-4" alt="sofa"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+            </div>
+
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <img src="assets/images/post4.png" class="w-100 shadow-1-strong rounded mb-4" alt="sofa"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+
+                <img src="assets/images/post6.png" class="w-100 shadow-1-strong rounded mb-4" alt="sapato"
+                    data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" />
+            </div>
+        </div>
+    </section>
+
+
+    <section class="row justify-content-center mt-5">
+        <div class="col-md-9">
+            <h3 id="grandes_marcas">Atendemos grandes marcas</h3>
+        </div>
+
+        <div class="splide col-md-9">
+            <div class="splide__track mt-4">
+                <ul class="splide__list">
+                    <li class="splide__slide"><img src="assets/icons/saint-globan.svg" alt="Saint Globan"></li>
+                    <li class="splide__slide"><img src="assets/icons/b&g.svg" alt="B & G"></li>
+                    <li class="splide__slide"><img src="assets/icons/eatstop.svg" alt="eatstop"></li>
+                    <li class="splide__slide"><img src="assets/icons/carstation.svg" alt="Car Station"></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- script -->
+    <script src="script.js"></script>
+    <!--script bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
