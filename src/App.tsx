@@ -213,9 +213,28 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
   useEffect(() => {
     if (isOpen) {
       fetch('/api/bookings')
-        .then(res => res.json())
+        .then(async res => {
+          const contentType = res.headers.get('content-type');
+          if (!res.ok) {
+            let errorMsg = 'Erro na requisição';
+            if (contentType && contentType.includes('application/json')) {
+              const errorData = await res.json();
+              errorMsg = errorData.error || errorMsg;
+            } else if (contentType && contentType.includes('text/html')) {
+              errorMsg = 'O servidor retornou uma página HTML em vez de JSON. Isso pode ser um erro de configuração no Netlify (404 ou 500).';
+            }
+            throw new Error(errorMsg);
+          }
+          if (!contentType || !contentType.includes('application/json')) {
+            throw new Error('O servidor não retornou JSON.');
+          }
+          return res.json();
+        })
         .then(data => setExistingBookings(data))
-        .catch(err => console.error('Erro ao carregar agendamentos:', err));
+        .catch(err => {
+          console.error('Erro ao carregar agendamentos:', err.message);
+          setExistingBookings([]);
+        });
     }
   }, [isOpen]);
 
@@ -244,8 +263,19 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
           ...contactInfo
         }),
       });
-
-      const data = await response.json();
+      const contentType = response.headers.get('content-type');
+      let data;
+      
+      if (contentType && contentType.includes('application/json')) {
+        const text = await response.text();
+        data = text ? JSON.parse(text) : {};
+      } else {
+        const text = await response.text();
+        const isHtml = text.trim().toLowerCase().startsWith('<!doctype');
+        throw new Error(isHtml 
+          ? 'Erro no servidor: O servidor retornou uma página HTML em vez de JSON. Verifique as configurações das Functions no Netlify.' 
+          : 'Erro inesperado: O servidor não retornou um formato JSON válido.');
+      }
       
       if (response.ok) {
         alert('Agendamento registrado com sucesso na planilha!');
