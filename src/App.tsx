@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   WashingMachine,
   Clock,
@@ -127,7 +127,6 @@ const FloatingWhatsApp = () => (
   </motion.a>
 );
 import { motion, AnimatePresence } from 'motion/react';
-import { useEffect } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -889,6 +888,12 @@ const Contact = () => (
 export default function App() {
   const [activeLegal, setActiveLegal] = useState<'terms' | 'privacy' | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Clean Nobre - Lavanderia Premium em Guarulhos | Lavagem a Seco e Serviços Especializados';
+    document.querySelector('meta[name="description"]')?.setAttribute('content', 
+      'Clean Nobre - Sua roupa impecável sem esforço. Serviços de lavanderia, lavagem a seco, passadoria e remoção de manchas em Guarulhos-SP. Entrega em 24h.');
+  }, []);
 
   const termsContent = (
     <>
