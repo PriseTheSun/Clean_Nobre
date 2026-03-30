@@ -203,12 +203,57 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [contactInfo, setContactInfo] = useState({ name: '', phone: '', email: '' });
   const [existingBookings, setExistingBookings] = useState<{date: string, time: string}[]>([]);
   
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
+  const today = new Date();
+  const currentDay = today.getDate();
+  const currentMonthNum = today.getMonth();
+  const currentYear = today.getFullYear();
+  
+  const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  const displayMonth = currentMonth.getMonth();
+  const displayYear = currentMonth.getFullYear();
+  
+  const daysInMonth = new Date(displayYear, displayMonth + 1, 0).getDate();
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   const weekDays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const timeSlots = ['08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
+
+  const isPastDay = (day: number) => {
+    if (displayYear < currentYear) return true;
+    if (displayYear > currentYear) return false;
+    if (displayMonth < currentMonthNum) return true;
+    if (displayMonth > currentMonthNum) return false;
+    return day < currentDay;
+  };
+
+  const prevMonth = () => {
+    setCurrentMonth(new Date(displayYear, displayMonth - 1, 1));
+    setSelectedDate(null);
+    setSelectedTime(null);
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth(new Date(displayYear, displayMonth + 1, 1));
+    setSelectedDate(null);
+    setSelectedTime(null);
+  };
+
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, '');
+    if (numbers.length <= 10) {
+      return numbers.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    }
+    return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value);
+    setContactInfo({ ...contactInfo, phone: formatted });
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -239,12 +284,12 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
   }, [isOpen]);
 
   const isTimeBooked = (day: number, time: string) => {
-    const dateStr = `${day}/03/2026`;
+    const dateStr = `${day}/${String(displayMonth + 1).padStart(2, '0')}/${displayYear}`;
     return existingBookings.some(b => b.date === dateStr && b.time === time);
   };
 
   const isDayFull = (day: number) => {
-    const dateStr = `${day}/03/2026`;
+    const dateStr = `${day}/${String(displayMonth + 1).padStart(2, '0')}/${displayYear}`;
     const bookedTimesForDay = existingBookings.filter(b => b.date === dateStr).length;
     return bookedTimesForDay >= timeSlots.length;
   };
@@ -258,7 +303,7 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          date: `${selectedDate}/03/2026`,
+          date: `${selectedDate}/${String(displayMonth + 1).padStart(2, '0')}/${displayYear}`,
           time: selectedTime,
           ...contactInfo
         }),
@@ -278,8 +323,7 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
       }
       
       if (response.ok) {
-        alert('Agendamento registrado com sucesso na planilha!');
-        onClose();
+        setShowSuccess(true);
       } else {
         const errorMessage = data.details ? `${data.error}\n\nDetalhes: ${data.details}` : (data.error || 'Erro ao agendar');
         throw new Error(errorMessage);
@@ -310,22 +354,67 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
             className="relative w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto subtle-scrollbar"
           >
             <div className="p-8">
-              <div className="flex justify-between items-center mb-8">
-                <div>
-                  <h3 className="text-2xl font-bold text-space-indigo">Agendar Coleta</h3>
-                  <p className="text-sm text-lavender-grey">Selecione o melhor dia e horário</p>
-                </div>
-                <button onClick={onClose} className="p-2 hover:bg-platinum rounded-full transition-colors">
-                  <X size={20} className="text-lavender-grey" />
-                </button>
-              </div>
+              {showSuccess ? (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle2 className="w-10 h-10 text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-space-indigo mb-4">Agendamento Efetuado!</h3>
+                  <p className="text-lavender-grey mb-4">
+                    Obrigado pelo seu agendamento. Em breve entraremos em contato pelo número <strong>{contactInfo.phone}</strong> para confirmar os detalhes.
+                  </p>
+                  <p className="text-sm text-lavender-grey mb-6 bg-yellow-50 p-4 rounded-xl border border-yellow-200">
+                    <span className="font-bold text-yellow-700">Atenção:</span> Fique atento ao número informado. Caso não atenda, tentaremos entrar em contato por outros meios.
+                  </p>
+                  <p className="text-sm text-lavender-grey mb-6">
+                    Caso precise de mudanças no agendamento, dúvidas ou informações, você pode nos chamar diretamente no WhatsApp:
+                  </p>
+                  <div className="flex flex-col gap-3">
+                    <a 
+                      href="https://wa.me/5511983344184"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-[#25D366] text-white px-8 py-3 rounded-xl font-bold hover:bg-[#20BD5A] transition-all flex items-center justify-center gap-2"
+                    >
+                      <WhatsAppIcon className="w-5 h-5" />
+                      Falar no WhatsApp
+                    </a>
+                    <button 
+                      onClick={() => {
+                        setShowSuccess(false);
+                        setSelectedDate(null);
+                        setSelectedTime(null);
+                        setContactInfo({ name: '', phone: '', email: '' });
+                        onClose();
+                      }}
+                      className="bg-platinum text-space-indigo px-8 py-3 rounded-xl font-bold hover:bg-lavender-grey/20 transition-all"
+                    >
+                      Fechar
+                    </button>
+                  </div>
+                </motion.div>
+              ) : (
+                <>
+                  <div className="flex justify-between items-center mb-8">
+                    <div>
+                      <h3 className="text-2xl font-bold text-space-indigo">Agendar Coleta</h3>
+                      <p className="text-sm text-lavender-grey">Selecione o melhor dia e horário</p>
+                    </div>
+                    <button onClick={onClose} className="p-2 hover:bg-platinum rounded-full transition-colors">
+                      <X size={20} className="text-lavender-grey" />
+                    </button>
+                  </div>
 
-              <div className="bg-platinum/50 p-6 rounded-3xl mb-6">
+                  <div className="bg-platinum/50 p-6 rounded-3xl mb-6">
                 <div className="flex justify-between items-center mb-6">
-                  <span className="font-bold text-space-indigo">Março 2026</span>
+                  <span className="font-bold text-space-indigo">{monthNames[displayMonth]} {displayYear}</span>
                   <div className="flex gap-2">
-                    <button className="p-1 hover:bg-white rounded-lg transition-colors"><ChevronLeft size={18} /></button>
-                    <button className="p-1 hover:bg-white rounded-lg transition-colors"><ChevronRight size={18} /></button>
+                    <button onClick={prevMonth} className="p-1 hover:bg-white rounded-lg transition-colors"><ChevronLeft size={18} /></button>
+                    <button onClick={nextMonth} className="p-1 hover:bg-white rounded-lg transition-colors"><ChevronRight size={18} /></button>
                   </div>
                 </div>
 
@@ -338,16 +427,18 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                 <div className="grid grid-cols-7 gap-2">
                   {days.map(day => {
                     const full = isDayFull(day);
+                    const past = isPastDay(day);
                     return (
                       <button
                         key={day}
-                        disabled={full}
+                        disabled={full || past}
                         onClick={() => {
                           setSelectedDate(day);
-                          setSelectedTime(null); // Reset time when date changes
+                          setSelectedTime(null);
                         }}
                         className={`aspect-square rounded-xl text-sm font-medium transition-all flex items-center justify-center relative
-                          ${full ? 'bg-lavender-grey/10 text-lavender-grey/40 cursor-not-allowed line-through' : 
+                          ${past ? 'bg-lavender-grey/10 text-lavender-grey/40 cursor-not-allowed' :
+                            full ? 'bg-lavender-grey/10 text-lavender-grey/40 cursor-not-allowed line-through' : 
                             selectedDate === day 
                             ? 'bg-punch-red text-white shadow-lg shadow-punch-red/30' 
                             : 'hover:bg-white text-space-indigo'}`}
@@ -393,30 +484,33 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => voi
                 />
                 <input 
                   type="tel" 
-                  placeholder="Telefone" 
+                  placeholder="(00) 00000-0000" 
                   value={contactInfo.phone}
-                  onChange={(e) => setContactInfo({ ...contactInfo, phone: e.target.value })}
+                  onChange={handlePhoneChange}
+                  maxLength={15}
                   className="w-full bg-platinum/30 border border-lavender-grey/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-punch-red transition-colors" 
                 />
               </div>
 
-              <div className="space-y-4">
-                <button 
-                  disabled={!selectedDate || !selectedTime || !contactInfo.name || isSubmitting}
-                  onClick={handleBooking}
-                  className={`w-full py-4 rounded-2xl font-bold transition-all shadow-lg flex items-center justify-center gap-2
-                    ${(selectedDate && selectedTime && contactInfo.name && !isSubmitting)
-                      ? 'bg-punch-red text-white hover:bg-flag-red shadow-punch-red/20' 
-                      : 'bg-lavender-grey/20 text-lavender-grey cursor-not-allowed'}`}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Processando...
-                    </>
-                  ) : 'Confirmar Agendamento'}
-                </button>
-              </div>
+                  <div className="space-y-4">
+                    <button 
+                      disabled={!selectedDate || !selectedTime || !contactInfo.name || !contactInfo.phone || isSubmitting}
+                      onClick={handleBooking}
+                      className={`w-full py-4 rounded-2xl font-bold transition-all shadow-lg flex items-center justify-center gap-2
+                        ${(selectedDate && selectedTime && contactInfo.name && contactInfo.phone && !isSubmitting)
+                          ? 'bg-punch-red text-white hover:bg-flag-red shadow-punch-red/20' 
+                          : 'bg-lavender-grey/20 text-lavender-grey cursor-not-allowed'}`}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Processando...
+                        </>
+                      ) : 'Confirmar Agendamento'}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         </div>
