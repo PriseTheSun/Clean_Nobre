@@ -149,7 +149,7 @@ const Navbar = () => {
         <div className="flex justify-between h-20 items-center">
           <div className="flex items-center gap-2">
             <WashingMachine className="text-punch-red w-8 h-8" />
-            <span className="text-2xl font-bold tracking-tighter text-space-indigo">Clean<span className="text-punch-red">Nobre</span></span>
+            <span className="text-2xl font-bold tracking-tighter text-space-indigo">Clean <span className="text-punch-red">Nobre</span></span>
           </div>
           
           <div className="hidden lg:flex space-x-8">
